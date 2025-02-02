@@ -1,3 +1,27 @@
 word = input("Enter a String:" )
-print("hi")
+
+vowels = "AEIOUaeiou"
+consonants = "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz"
+special = "1234567890!@#$%^&*()_+"
+
+vowel_count = 0
+consonant_count = 0
+special_count = 0
+space = 0
+
+for i in word:
+    if i in vowels:
+        vowel_count += 1
+    elif i in consonants:
+        consonant_count += 1
+    elif i in special:
+        special_count += 1
+    elif i == " ": 
+        space += 1
+        
+print("Vowels:", vowel_count)
+print("Consonants:", consonant_count)
+print("Special Characters:", special_count)
+print("Spaces:", space)
+
 
