@@ -1,1 +1,3 @@
-print("hello rome")
+word = input("Enter a String:" )
+print("hi")
+
