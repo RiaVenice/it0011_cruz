@@ -5,4 +5,5 @@ age = input("Enter Your Age Name: ")
 slice = first[0:3] 
 print("Full Name: " + first + " " + last)
 print("Sliced Name: " + slice)
-print("Greeting Message: " + "Hello " + slice + "! Welcome. You are " + age + " years old.") 
+message = "Greeting Message: Hello {} ! Welcome. You are {} years old."
+print(message.format(slice, age))
