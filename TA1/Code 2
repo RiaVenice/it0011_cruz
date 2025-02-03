@@ -1,0 +1,10 @@
+number = input("Enter a String: ")
+
+digits = "1234567890"
+sum = 0
+
+for i in number:
+    if i in digits:
+        sum += int(i)
+    
+print("Sum of Digits:", sum)
