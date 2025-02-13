@@ -1,0 +1,5 @@
+print("Reading Student Information: ")
+
+file = open("student.txt", "r")
+print(file.read())
+file.close()
