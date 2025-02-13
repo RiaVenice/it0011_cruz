@@ -1,0 +1,10 @@
+with open('MIDTERM EXAM\\numbers.txt') as file:
+    lines = file.readlines()
+
+count = 1
+for line in lines:
+    nums = [n.strip() for n in line.strip().split(',') if n.strip()]
+    total_sum = sum(int(n) for n in nums)
+    result = "Palindrome" if str(total_sum) == str(total_sum)[::-1] else "Not a palindrome"
+    print(f"Line {count}: {', '.join(nums)} (sum {total_sum}) - {result}")
+    count += 1
