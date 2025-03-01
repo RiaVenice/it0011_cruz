@@ -30,7 +30,7 @@ while True:
         for record in student_records:
             file.write(str(record) + "\n")
         file.close()
-        print("Records saved successfully!")
+        print("\nRecords saved successfully!")
     
     elif choice == 3:  # Save As file
         filename = input("Enter the file name: ")
@@ -38,20 +38,20 @@ while True:
         for record in student_records:
             file.write(str(record) + "\n")
         file.close()
-        print("Records saved as", filename)
+        print("\nRecords saved as", filename)
     
     elif choice == 4:  # Show all student records
         if not student_records:
-            print("No records available.")
+            print("\nNo records available.")
         else:
-            print("Order by:")
-            print("1. Last Name")
-            print("2. Grade")
-            order = int(input("Enter your choice: "))
-            if order == 1:
+            print("\nOrder by:")
+            print("a. Last Name")
+            print("b. Grade")
+            order = input("Enter your choice: ")
+            if order == "a":
                 student_records.sort(key=lambda x: x[1][1])
-            elif order == 2:
-                student_records.sort(key=lambda x: (x[2] * 0.6 + x[3] * 0.4), reverse=True)
+            elif order == "b":
+                student_records.sort(key=lambda x: ((x[2] * 60 + x[3] * 40) / 100), reverse=True)
             for record in student_records:
                 print(record)
     
@@ -64,19 +64,19 @@ while True:
                 found = True
                 break
         if not found:
-            print("Student not found.")
+            print("\nStudent not found.")
     
     elif choice == 6:  # Add record
         student_id = input("Enter Student ID (6 digits): ")
         if len(student_id) != 6 or not student_id.isdigit():
-            print("Invalid ID! Must be 6 digits.")
+            print("\nInvalid ID! Must be 6 digits.")
         else:
             first_name = input("Enter First Name: ")
             last_name = input("Enter Last Name: ")
             class_standing = float(input("Enter Class Standing Grade: "))
             major_exam = float(input("Enter Major Exam Grade: "))
-            student_records.append((student_id, (first_name, last_name), class_standing, major_exam))
-            print("Successfully added!")
+            student_records.append((student_id, first_name, last_name, class_standing, major_exam))
+            print("\nSuccessfully added!")
     
     elif choice == 7:  # Edit record
         student_id = input("Enter Student ID to edit: ")
@@ -87,12 +87,12 @@ while True:
                 last_name = input("Enter New Last Name: ")
                 class_standing = float(input("Enter New Class Standing Grade: "))
                 major_exam = float(input("Enter New Major Exam Grade: "))
-                student_records[i] = (student_id, (first_name, last_name), class_standing, major_exam)
-                print("Record updated!")
+                student_records[i] = (student_id, first_name, last_name, class_standing, major_exam)
+                print("\nRecord updated!")
                 found = True
                 break
         if not found:
-            print("Student not found.")
+            print("\nStudent not found.")
     
     elif choice == 8:  # Delete record
         student_id = input("Enter Student ID to delete: ")
@@ -105,12 +105,12 @@ while True:
                 found = True
         student_records = new_records
         if found:
-            print("Record deleted!")
+            print("\nRecord deleted!")
         else:
-            print("Student not found.")
+            print("\nStudent not found.")
     
     elif choice == 9:  # Exit
-        print("Exiting program...")
+        print("\nExiting program...")
         file = open("student.txt", "w")
         for record in student_records:
             file.write(str(record) + "\n")
@@ -118,4 +118,4 @@ while True:
         break 
     
     else:
-        print("Invalid choice! Try again.")
+        print("\nInvalid choice! Try again.")
