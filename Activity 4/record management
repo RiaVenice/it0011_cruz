@@ -19,7 +19,7 @@ while True:
     if choice == 1:  # Open file
         try:
             file = open("student.txt", "r")
-            student_records = [eval(line.strip()) for line in file]
+            print(file.read())
             file.close()
             print("File loaded successfully.")
         except FileNotFoundError:
@@ -51,9 +51,16 @@ while True:
             if order == "a":
                 student_records.sort(key=lambda x: x[1][1])
             elif order == "b":
-                student_records.sort(key=lambda x: (x[2] * 0.6 + x[3] * 0.4), reverse=True)
+               student_records.sort(key=lambda x: ((float(x[3]) * 0.6 + float(x[4]) * 0.4)), reverse=True)
             for record in student_records:
                 print(record)
+                
+            print("\nStudent Records:\n")
+            for student in student_records:
+                final_grade = (float(student[3]) * 0.6 + float(student[4]) * 0.4)  
+                print(f"Student No.: {student[0]}")
+                print(f"Full Name: {student[1]} {student[2]}")
+                print(f"Final Grade: {final_grade:.2f}\n")
     
     elif choice == 5:  # Show student record
         student_id = input("Enter Student ID: ")
