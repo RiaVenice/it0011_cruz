@@ -3,6 +3,7 @@
 student_records = []
 
 while True:
+    print("\nRecord Management")
     print("1. Open file")
     print("2. Save file")
     print("3. Save As file")
@@ -114,7 +115,7 @@ while True:
         for record in student_records:
             file.write(str(record) + "\n")
         file.close()
-        break
+        break 
     
     else:
         print("Invalid choice! Try again.")
