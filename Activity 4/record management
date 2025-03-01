@@ -1,1 +1,120 @@
-print("Hello")
+# Record Management Program
+
+student_records = []
+
+while True:
+    print("1. Open file")
+    print("2. Save file")
+    print("3. Save As file")
+    print("4. Show All Student Records")
+    print("5. Show Student Record")
+    print("6. Add Record")
+    print("7. Edit Record")
+    print("8. Delete Record")
+    print("9. Exit")
+
+    choice = int(input("Enter your choice: "))
+    
+    if choice == 1:  # Open file
+        try:
+            file = open("student.txt", "r")
+            student_records = [eval(line.strip()) for line in file]
+            file.close()
+            print("File loaded successfully.")
+        except FileNotFoundError:
+            print("File not found.")
+    
+    elif choice == 2:  # Save file
+        file = open("student.txt", "w")
+        for record in student_records:
+            file.write(str(record) + "\n")
+        file.close()
+        print("Records saved successfully!")
+    
+    elif choice == 3:  # Save As file
+        filename = input("Enter the file name: ")
+        file = open(filename, "w")
+        for record in student_records:
+            file.write(str(record) + "\n")
+        file.close()
+        print("Records saved as", filename)
+    
+    elif choice == 4:  # Show all student records
+        if not student_records:
+            print("No records available.")
+        else:
+            print("Order by:")
+            print("1. Last Name")
+            print("2. Grade")
+            order = input("Enter your choice: ")
+            if order == 1:
+                student_records.sort(key=lambda x: x[1][1])
+            elif order == 2:
+                student_records.sort(key=lambda x: (x[2] * 0.6 + x[3] * 0.4), reverse=True)
+            for record in student_records:
+                print(record)
+    
+    elif choice == 5:  # Show student record
+        student_id = input("Enter Student ID: ")
+        found = False
+        for record in student_records:
+            if record[0] == student_id:
+                print(record)
+                found = True
+                break
+        if not found:
+            print("Student not found.")
+    
+    elif choice == 6:  # Add record
+        student_id = input("Enter Student ID (6 digits): ")
+        if len(student_id) != 6 or not student_id.isdigit():
+            print("Invalid ID! Must be 6 digits.")
+        else:
+            first_name = input("Enter First Name: ")
+            last_name = input("Enter Last Name: ")
+            class_standing = float(input("Enter Class Standing Grade: "))
+            major_exam = float(input("Enter Major Exam Grade: "))
+            student_records.append((student_id, (first_name, last_name), class_standing, major_exam))
+            print("Successfully added!")
+    
+    elif choice == 7:  # Edit record
+        student_id = input("Enter Student ID to edit: ")
+        found = False
+        for i in range(len(student_records)):
+            if student_records[i][0] == student_id:
+                first_name = input("Enter New First Name: ")
+                last_name = input("Enter New Last Name: ")
+                class_standing = float(input("Enter New Class Standing Grade: "))
+                major_exam = float(input("Enter New Major Exam Grade: "))
+                student_records[i] = (student_id, (first_name, last_name), class_standing, major_exam)
+                print("Record updated!")
+                found = True
+                break
+        if not found:
+            print("Student not found.")
+    
+    elif choice == 8:  # Delete record
+        student_id = input("Enter Student ID to delete: ")
+        new_records = []
+        found = False
+        for record in student_records:
+            if record[0] != student_id:
+                new_records.append(record)
+            else:
+                found = True
+        student_records = new_records
+        if found:
+            print("Record deleted!")
+        else:
+            print("Student not found.")
+    
+    elif choice == 9:  # Exit
+        print("Exiting program...")
+        file = open("student.txt", "w")
+        for record in student_records:
+            file.write(str(record) + "\n")
+        file.close()
+        break
+    
+    else:
+        print("Invalid choice! Try again.")
