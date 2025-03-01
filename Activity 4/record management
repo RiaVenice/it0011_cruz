@@ -51,7 +51,7 @@ while True:
             if order == "a":
                 student_records.sort(key=lambda x: x[1][1])
             elif order == "b":
-                student_records.sort(key=lambda x: ((x[2] * 60 + x[3] * 40) / 100), reverse=True)
+                student_records.sort(key=lambda x: (x[2] * 0.6 + x[3] * 0.4), reverse=True)
             for record in student_records:
                 print(record)
     
