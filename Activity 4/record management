@@ -46,7 +46,7 @@ while True:
             print("Order by:")
             print("1. Last Name")
             print("2. Grade")
-            order = input("Enter your choice: ")
+            order = int(input("Enter your choice: "))
             if order == 1:
                 student_records.sort(key=lambda x: x[1][1])
             elif order == 2:
