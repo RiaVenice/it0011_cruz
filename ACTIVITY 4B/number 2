@@ -1,0 +1,31 @@
+#number 2: currency converter
+file_path = "ACTIVITY 4B\\currency.csv"
+
+# Read the CSV file and store the data in a dictionary
+currency_rates = {}
+
+with open(file_path, "r") as file:
+    lines = file.readlines()
+    
+    # skip the header
+    for line in lines[1:]:
+        row = line.strip().split(",")  # Split by comma
+        code = row[0]
+        name = row[1]
+        rate = float(row[2])  
+        currency_rates[code] = (name, rate)
+
+
+usd_amount = float(input("How much dollar do you have? "))
+currency_code = input("What currency you want to have? ").upper()
+
+
+if currency_code in currency_rates:
+    currency_name, exchange_rate = currency_rates[currency_code]
+    converted_amount = usd_amount * exchange_rate
+
+
+    print(f"\nDollar: {usd_amount} USD")
+    print(f"{currency_name}: {converted_amount:.2f}")
+else:
+    print("Currency code not found. Please check and try again.")
