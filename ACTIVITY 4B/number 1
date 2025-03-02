@@ -1,0 +1,40 @@
+#code 1: sets 
+
+#sets
+A = {'a', 'b', 'c', 'd', 'f', 'g'}
+B = {'b', 'c', 'h', 'l', 'm', 'o'}
+C = {'c', 'd', 'f', 'h', 'i', 'j', 'k'}
+
+#letter A
+A_union_B = A | B
+print("A)")
+print("A ∪ B: ", A_union_B)
+print("Elements in set A & B:", len(A_union_B))
+print("\n--------------------\n")
+
+#letter B
+B_not_in_A_C = B - (A | C)
+print("B)")
+print("B - AC: ", B_not_in_A_C)
+print("Elements in B not in A or C:", len(B_not_in_A_C))
+print("\n--------------------\n")
+
+#letter C
+set_1 = C - A
+print("C)")
+print("i.", set_1)
+
+set_2 = A & C
+print("ii.", set_2)
+
+set_3 = B & (A | C)
+print("iii.", set_3)
+
+set_4 = (A & C) - B
+print("iv.", set_4)
+
+set_5 = A & B & C
+print("v.", set_5)
+
+set_6 = B - (A | C)
+print("vi.", set_6)
