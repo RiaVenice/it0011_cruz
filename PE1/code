@@ -1,0 +1,32 @@
+
+EXCLUDE_WORDS = {"and", "but", "or", "nor", "for", "so", "yet", "a", "an", "the", "of"}
+
+def count_unique_words(text):
+    words = text.split()
+    word_count = {}
+    total_words = 0
+    
+    for word in words:
+        cleaned_word = word.strip(".,!?;:")  # Remove punctuation
+        if cleaned_word.lower() not in EXCLUDE_WORDS:  # Exclude common words
+            word_count[cleaned_word] = word_count.get(cleaned_word, 0) + 1
+            total_words += 1
+    
+    # Separate lowercase and uppercase words, then sort them
+    lowercase_words = {k: v for k, v in word_count.items() if k.islower()}
+    uppercase_words = {k: v for k, v in word_count.items() if k[0].isupper()}
+    
+    sorted_lowercase = sorted(lowercase_words.items())
+    sorted_uppercase = sorted(uppercase_words.items())
+    
+    # Display results
+    for word, count in sorted_lowercase:
+        print(f"{word:<10} - {count}")
+    for word, count in sorted_uppercase:
+        print(f"{word:<10} - {count}")
+    
+    print(f"Total words filtered: {total_words}")
+
+# Get user input
+user_input = input("Enter a string statement:\n")
+count_unique_words(user_input)
