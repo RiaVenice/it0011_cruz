@@ -1,0 +1,51 @@
+def divide(a, b):
+    if b == 0:
+        return None
+    else:
+        return a / b
+    
+def exponent(a, b):
+    return a ** b
+
+def remainder(a, b):
+    if b == 0:
+        return None
+    else:
+        return a % b
+
+def summation(a, b):
+    if a>=b:
+        return None
+    else:
+        return sum(range(a, b+1))
+
+while True:
+    print("\n== MENU ==")
+    print("[D] Divide")
+    print("[E] Exponentiation")    
+    print("[R] Remainder")
+    print("[F] Summation")
+    print("[X] Exit")
+    choice = str(input("Enter choice: "))
+
+    if choice == 'D':
+        a = int(input("Enter first number: "))
+        b = int(input("Enter second number: "))
+        print(f"Result: {divide(a, b)}")
+    elif choice == 'E' :
+        a = int(input("Enter base: "))
+        b = int(input("Enter exponent: "))
+        print(f"Result: {exponent(a, b)}")
+    elif choice == 'R':
+        a = int(input("Enter first number: "))
+        b = int(input("Enter second number: "))
+        print(f"Result: {remainder(a, b)}")
+    elif choice == 'F':
+        a = int(input("Enter first number: "))
+        b = int(input("Enter second number: "))
+        print(f"Result: {summation(a, b)}")
+    elif choice == 'X':
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice!")
