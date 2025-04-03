@@ -6,7 +6,7 @@ class Item:
         self.price = price
 
     def __str__(self):
-        return f"ID: {self.item_id}, Name: {self.name}, Description: {self.description}, Price: ${self.price}"
+        return f"ID: {self.item_id}, Name: {self.name}, Description: {self.description}, Price: ₱{self.price}"
 
 class ItemManagement:
     def __init__(self):
@@ -77,7 +77,7 @@ class ItemManagement:
             print("5. Exit")
             choice = input("Enter your choice: ")
 
-            if choice == '1':  # Create Item
+            if choice == '1':  
                 try:
                     item_id = int(input("Enter item ID: "))
                     name = input("Enter item name: ")
@@ -87,14 +87,14 @@ class ItemManagement:
                 except ValueError:
                     print("Invalid input. Please enter the correct data type.")
 
-            elif choice == '2':  # Read Item
+            elif choice == '2':  
                 try:
                     item_id = int(input("Enter item ID to read: "))
                     self.read_item(item_id)
                 except ValueError:
                     print("Invalid input. Item ID must be an integer.")
 
-            elif choice == '3':  # Update Item
+            elif choice == '3':  
                 try:
                     item_id = int(input("Enter item ID to update: "))
                     name = input("Enter new item name (leave blank to keep current): ")
@@ -110,20 +110,19 @@ class ItemManagement:
                 except ValueError:
                     print("Invalid input. Please enter the correct data type.")
             
-            elif choice == '4':  # Delete Item
+            elif choice == '4':  
                 try:
                     item_id = int(input("Enter item ID to delete: "))
                     self.delete_item(item_id)
                 except ValueError:
                     print("Invalid input. Item ID must be an integer.")
 
-            elif choice == '5':  # Exit
+            elif choice == '5':  
                 print("Exiting system.")
                 break
             else:
                 print("Invalid choice. Please try again.")
 
-# Example of usage
 if __name__ == "__main__":
     manager = ItemManagement()
     manager.user_input()
