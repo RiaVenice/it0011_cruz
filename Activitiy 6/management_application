@@ -1,0 +1,129 @@
+class Item:
+    def __init__(self, item_id, name, description, price):
+        self.item_id = item_id
+        self.name = name
+        self.description = description
+        self.price = price
+
+    def __str__(self):
+        return f"ID: {self.item_id}, Name: {self.name}, Description: {self.description}, Price: ${self.price}"
+
+class ItemManagement:
+    def __init__(self):
+        self.items = {}
+
+    def validate_item(self, item_id, name, description, price):
+        if not isinstance(item_id, int):
+            raise ValueError("Item ID must be an integer.")
+        if not name or not isinstance(name, str):
+            raise ValueError("Name must be a non-empty string.")
+        if not isinstance(description, str):
+            raise ValueError("Description must be a string.")
+        if not isinstance(price, (float, int)) or price <= 0:
+            raise ValueError("Price must be a positive number.")
+    
+    def create_item(self, item_id, name, description, price):
+        try:
+            self.validate_item(item_id, name, description, price)
+            if item_id in self.items:
+                raise KeyError(f"Item with ID {item_id} already exists.")
+            item = Item(item_id, name, description, price)
+            self.items[item_id] = item
+            print(f"Item created: {item}")
+        except (ValueError, KeyError) as e:
+            print(f"Error creating item: {e}")
+
+    def read_item(self, item_id):
+        try:
+            if item_id not in self.items:
+                raise KeyError(f"Item with ID {item_id} not found.")
+            item = self.items[item_id]
+            print(f"Item details: {item}")
+        except KeyError as e:
+            print(f"Error reading item: {e}")
+    
+    def update_item(self, item_id, name=None, description=None, price=None):
+        try:
+            if item_id not in self.items:
+                raise KeyError(f"Item with ID {item_id} not found.")
+            item = self.items[item_id]
+            if name:
+                item.name = name
+            if description:
+                item.description = description
+            if price is not None:
+                self.validate_item(item_id, name, description, price)  
+                item.price = price
+            print(f"Item updated: {item}")
+        except (ValueError, KeyError) as e:
+            print(f"Error updating item: {e}")
+    
+    def delete_item(self, item_id):
+        try:
+            if item_id not in self.items:
+                raise KeyError(f"Item with ID {item_id} not found.")
+            del self.items[item_id]
+            print(f"Item with ID {item_id} has been deleted.")
+        except KeyError as e:
+            print(f"Error deleting item: {e}")
+    
+    def user_input(self):
+        while True:
+            print("\nItem Management System:")
+            print("1. Create Item")
+            print("2. Read Item")
+            print("3. Update Item")
+            print("4. Delete Item")
+            print("5. Exit")
+            choice = input("Enter your choice: ")
+
+            if choice == '1':  # Create Item
+                try:
+                    item_id = int(input("Enter item ID: "))
+                    name = input("Enter item name: ")
+                    description = input("Enter item description: ")
+                    price = float(input("Enter item price: "))
+                    self.create_item(item_id, name, description, price)
+                except ValueError:
+                    print("Invalid input. Please enter the correct data type.")
+
+            elif choice == '2':  # Read Item
+                try:
+                    item_id = int(input("Enter item ID to read: "))
+                    self.read_item(item_id)
+                except ValueError:
+                    print("Invalid input. Item ID must be an integer.")
+
+            elif choice == '3':  # Update Item
+                try:
+                    item_id = int(input("Enter item ID to update: "))
+                    name = input("Enter new item name (leave blank to keep current): ")
+                    description = input("Enter new item description (leave blank to keep current): ")
+                    price = input("Enter new item price (leave blank to keep current): ")
+
+                    if price:
+                        price = float(price)
+                    else:
+                        price = None
+
+                    self.update_item(item_id, name, description, price)
+                except ValueError:
+                    print("Invalid input. Please enter the correct data type.")
+            
+            elif choice == '4':  # Delete Item
+                try:
+                    item_id = int(input("Enter item ID to delete: "))
+                    self.delete_item(item_id)
+                except ValueError:
+                    print("Invalid input. Item ID must be an integer.")
+
+            elif choice == '5':  # Exit
+                print("Exiting system.")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+
+# Example of usage
+if __name__ == "__main__":
+    manager = ItemManagement()
+    manager.user_input()
